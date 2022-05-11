@@ -1,0 +1,26 @@
+html,
+body {
+  /* Base styles go here */
+  font: 14px/1.5 Arial, sans-serif;
+  /* {% comment %} background: #b2cecf; {% endcomment %} */
+  background: #63aa9c;
+}
+
+.content {
+  padding: 24px 20px;
+  /* width: 920px; */
+  margin: 100px auto;
+  background: #b2cecf;
+  border-radius: 6px;
+}
+
+table {
+  background: #e7e7e7;
+  overflow: scroll;
+  border-radius: 4px;
+}
+table thead {
+  /* background-color: beige; */
+  background: #63aa9c;
+}
+

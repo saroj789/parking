@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2 ">
+    {% include "messages.html" %}
+  </div>
+</div>
+<form action="{% url 'slots' %}" method="POST" id="slotForm">
+  {% csrf_token %}
+  <div class="form-row row">
+
+    <div class="form-group col-md-6">
+      <label class="font-weight-bold"> City : </label>
+      <!-- <input type="text" class="form-control" name="city" id="city" value="{{city}}" required /> -->
+
+      <select class="mdb-select md-form form-control" id="city" name="city" searchable="Search here.." required>
+        <option value="" selected disabled>Select City</option>
+        {% for c in cities %}
+        {% if city == c.city %}
+
+        <option value="{{c.city}}" selected>{{c.city}}</option>
+        {% else %}
+        <option value="{{c.city}}">{{c.city}}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+
+    <div class="form-group col-md-6">
+      <label class="font-weight-bold"> Parking Name : </label>
+      <!-- <input type="text" class="form-control" name="parking_name" id="parking_name" /> -->
+      <select class="mdb-select md-form form-control" name="parking_name" id="parking_name" searchable="Search here..">
+        <option value="" disabled selected>Select Parking</option>
+        {% for p in parkings %}
+        <option value="{{p.name}}">{{p.name}} {{p.total_slots}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+  </div>
+
+  <div class="">
+    <input type="submit" class="btn btn-primary px-4 my-4" value="Check" />
+    <input type="reset" class="btn btn-success px-4 my-4 mx-3" value="Reset" />
+  </div>
+
+</form>
+{% endblock content %}
+
+{% block script %}
+
+<script language="javascript" type="text/javascript">
+  $(document).ready(function () {
+    function submitForm() {
+      if ($("#parking_name").val()) {
+        $("#parking_name").val('')
+      }
+      $("#slotForm").submit();
+    }
+    $("#city").change(submitForm)
+  });
+
+</script>
+
+
+<!-- <script>
+  $(document).ready(function () {
+    $('.mdb-select').materialSelect();
+  });
+</script> -->
+
+{% endblock script %}

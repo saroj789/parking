@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+ {% block css %}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href={% static 'accounts/css/profileform.css' %} >
+{% endblock css %}
+
+{% block content %}
+
+    {% include "accounts/include/cprofile.html" %}
+
+{% endblock %}
+
+{% block js %}
+<script src={% static 'accounts/js/profileform.js' %}></script>
+
+{% endblock js %} 
+

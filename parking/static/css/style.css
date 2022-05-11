@@ -1,0 +1,61 @@
+/* header */
+.header {
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
+.header .flex {
+  justify-content: space-between;
+}
+
+.header a {
+  padding: 2px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+	color: #333;
+}
+
+.header a:hover {
+  animation: pulse; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 0.5s;
+}
+
+/* register */
+.register h1 {
+  color: var(--accent);
+}
+
+.register img {
+  width: 350px;
+}
+/* login */
+.login h1 {
+  color: var(--accent);
+}
+
+.login img {
+  width: 450px;
+}
+
+.login .form-btn {
+  border-radius: 8px;
+}
+
+/* about us */
+.about-us .btn {
+  padding: 5px 20px;
+}
+/* footer */
+footer .container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* search page */
+
+
+/* navbar */
+.navbar{
+	background-color: #3a6b60;
+}
+
