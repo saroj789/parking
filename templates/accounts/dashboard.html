@@ -8,7 +8,6 @@
 {% endblock css %}
 
 {% block content %}
-{% comment %} <h1> abc {{ hiretubers }} </h1> {% endcomment %}
 
 <main class="dashboard">
 
@@ -20,115 +19,69 @@
   <h1 class="text-center">
     Dashboard
   </h1>
-  <!-- 
+  {% comment %}
   <div class="banner">
     <img src="{% static './assets/images/bg-banner.png' %}" alt="profile-image" class="img-fluid w-100">
     <h1 class="text-center">
       Dashboard
     </h1>
-  </div>
+  </div> {% endcomment %}
 
   <section class="container mt-5">
     <h2 class="text-center">Welcome to Dashboard</h2>
-    <h4 class="text-center text-white-50">
+    <p class="text-center ">
       hi <span class='text-primary'>{{ user.username | upper }} </span> ! Hope you are having a good day
-    </h4>
+    </p>
     <br>
 
-    {% if user.is_tuber %}
+    {% if bookings %}
 
     <div class="table-responsive- mt-3">
 
       <table class="table table-striped">
         <caption style="caption-side:top">
-          <h3>Received Hirerequests </h3>
+          <h3>My Bookings </h3>
         </caption>
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Sender </th>
-
+            <th scope="col">Parking </th>
+            <th scope="col">Slot</th>
             <th scope="col" class='city'>City</th>
-            <th scope="col">Visit</th>
-            <th scope="col">Respond</th>
+            <th scope="col">Car Number</th>
             <th scope="col">Status</th>
 
           </tr>
         </thead>
         <tbody>
-          {% for hirerequest in received_hirerequests %}
+          {% for booking in bookings %}
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{hirerequest.first_name}}</td>
-            <!-- <td>{{hirerequest.email}}</td> -->
-  <td class='city'>{{hirerequest.city}}</td>
-  <td>
-    <a href={% url 'received_hirerequest' hirerequest.id %}>
-      <div class="btn btn-accent visit"><span>Go to </span> Page </div>
-    </a>
-  </td>
-  <td>
-    <div class="btn btn-success " id='accept' onclick='accept( "{{hirerequest.id}}",event )'>Accept </div>
-    <div class="btn btn-accent " id='reject' onclick="reject( '{{hirerequest.id}}',event )">Reject </div>
-  </td>
+            <td>{{booking.slot.parking}}</td>
+            <td>{{booking.slot.position}}</td>
+            <td class='city'>{{booking.slot.parking.city}}</td>
+            <td>{{ booking.car_number }}</td>
+            <td>{{ booking.status }}</td>
 
-  <td>{{ hirerequest.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-  </tr>
-  {% endfor %}
-  </tbody>
-  </table>
-  </div>
+    {% else %}
 
-  {% endif %}
+    <h4 class="text-center ">No Booking Found</h4>
 
-  <br>
+    <br><br><br>
+    <p class="text-center "> click here for bookings
+      <a href="{% url 'slots' %}" class="btn btn-secondary text-center "> Check Slots</a>
+    </p>
 
-  <div class="table-responsive- mt-3">
+    {% endif %}
 
-    <table class="table table-striped">
-      <caption style="caption-side:top">
-        <h3>Sent Hirerequests </h3>
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Tuber</th>
-          <th scope="col" class='city'>City</th>
-          <th scope="col">Visit</th>
-          <th scope="col">Cancel</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for hirerequest in sent_hirerequests %}
-        <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <td>{{hirerequest.tuber_name}}</td>
-          <td class='city'> {{hirerequest.city}}</td>
-
-          <td>
-            <a href={% url 'sent_hirerequest' hirerequest.id %}>
-              <div class="btn btn-accent visit"><span> Go to <span>Page </div>
-            </a>
-          </td>
-          <td>
-
-            <div class="btn btn-accent cancel" id='cancel' onclick="cancel('{{ hirerequest.id }}',event)"> Cancel
-            </div>
-
-          </td>
-          <td>{{ hirerequest.status }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-
-
-
-  </section> -->
+    <br>
+  </section>
 
 
 

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .decoretors import unauthenticated_user
 from .models import Account
 import requests
+from booking.models import BookSlot
 
 # Create your views here.
 
@@ -86,17 +87,16 @@ def register(request):
 
 @login_required(login_url='login')
 def dashboard(request):
+    context ={}
+    try :
+        bookings = BookSlot.objects.filter(user=request.user).order_by('-id')
+        context['bookings'] = bookings
+        
+    except Exception as e:
+        messages.error(request,'something went wrong, Please try after sometime.')
+        print('exception : ',e)
 
-    # sent_hirerequests=Hiretuber.objects.filter(user_id=request.user.id).order_by('-created_date').order_by('status')       # request.user is logged in user. if not logged in then it- AnnonymousUser
-    # data={'sent_hirerequests':sent_hirerequests}                                  # sent_hire_req
-
-    # if request.user.is_tuber:
-    #     received_hire_req=Hiretuber.objects.filter(tuber_id=request.user.id ).order_by('-created_date').order_by('status')
-    #     data['received_hirerequests']=received_hire_req
-    #     #print(received_hire_req)
-    # #print(data)
-    # return render(request,'accounts/dashboard.html',data)
-    return render(request,'accounts/dashboard.html')
+    return render(request,'accounts/dashboard.html', context)
 
 
 
